@@ -18,6 +18,8 @@ ITEM_PIPELINES = {
     'HomeOfGoods.pipelines.HomeofgoodsPipeline' : 200,
     'scrapy.pipelines.images.ImagesPipeline': 1,
 }
+with open("primary_key.txt","r") as f:
+    pk = int(f.readline()) - 1
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'HomeOfGoods (+http://www.yourdomain.com)'
@@ -26,7 +28,7 @@ ITEM_PIPELINES = {
 ROBOTSTXT_OBEY = True
 
 CUR_DIR = os.path.dirname(os.path.realpath(__file__))
-IMAGES_STORE = os.path.join(CUR_DIR, '..', 'images')
+IMAGES_STORE = os.path.join(CUR_DIR, '..', 'images/'+ str(pk))
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32

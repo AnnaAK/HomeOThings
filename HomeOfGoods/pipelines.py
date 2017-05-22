@@ -31,10 +31,10 @@ class CommonTable(Base):
     link_mfr = Column(String)
     link_shop = Column(String)
     url = Column(String)
-    instruction = Column(String)
+    img = Column(String)
 
     def __init__(self, pk, type, mfr, model, dimensions, width, height, deep, weight, shop,
-                 link_mfr, link_shop, url, instruction):
+                 link_mfr, link_shop, url, img):
         self.pk = pk
         self.type = type
         self.mfr = mfr
@@ -48,13 +48,13 @@ class CommonTable(Base):
         self.link_mfr = link_mfr
         self.link_shop = link_shop
         self.url = url
-        self.instruction = instruction
+        self.img = img
 
     def __repr__(self):
         return "<Data %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s>" % \
                (self.pk, self.type, self.mfr, self.model, self.dimensions, self.width,
                 self.height, self.deep, self.weight, self.shop, self.link_mfr, self.link_shop,self.url,
-                self.instruction)
+                self.img)
 
 class HomeofgoodsPipeline(object):
     def __init__(self):
@@ -69,7 +69,7 @@ class HomeofgoodsPipeline(object):
         if pk not in self.pk:
             dt = CommonTable(item['pk'], item['type'], item['mfr'], item['model'], item['dimensions'], item['width'],
                              item['height'], item['deep'], item['weight'], item['shop'], item['link_mfr'],
-                             item['link_shop'], item['url'], item['instruction']
+                             item['link_shop'], item['url'], item['img']
                            )
             self.pk.add(pk)
             self.session.add(dt)

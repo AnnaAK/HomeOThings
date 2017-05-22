@@ -4,6 +4,7 @@ from scrapy.linkextractors import LinkExtractor
 from scrapy.selector import HtmlXPathSelector, Selector
 from HomeOfGoods.items import CommonInfoItem
 import urlparse
+import os
 from scrapy.http import Request
 
 
@@ -58,6 +59,6 @@ class InfoSpider(CrawlSpider):
             Item['weight'] = weig[0]
         else: Item['weight'] = ''
         Item['url'] = response.url
-        Item['image_urls'] = [urlparse.urljoin(response.url, u) for u in response.xpath("//img[contains(@alt,'"+model+"')]/@src").extract()]
-        Item['instruction'] = ''
+        #Item['image_urls'] = [urlparse.urljoin(response.url, u) for u in response.xpath("//img[contains(@alt,'"+model+"')]/@src").extract()]
+        Item['img'] = [urlparse.urljoin(response.url, u) for u in response.xpath("//img[contains(@alt,'"+model+"')]/@src").extract()][0]
         yield Item
