@@ -13,8 +13,11 @@ class QSpider(scrapy.Spider):
         'https://market.yandex.ru/search?text='+ keywords,)
     def parse(self, response):
         product = response.xpath('//div[@class="snippet-card__col"]/h3/a/@href').extract()[0]
-        product = str(product)
-        link = "https://market.yandex.ru" + product
+        if product != []:
+            product = product[0]
+            link = "https://market.yandex.ru" + product
+        else: link = ''
+
 
         f = open("urls.txt", "w")
         f.write(str(link))
